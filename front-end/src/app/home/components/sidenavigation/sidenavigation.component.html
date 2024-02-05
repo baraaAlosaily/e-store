@@ -1,0 +1,36 @@
+<div class="py-4 px-2 wrapper">
+  <h2>Category</h2>
+  <!-- <div class="content">
+    <div>
+      <a href="">Category</a>
+      <svg style="width: 25px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+      </svg>
+    </div>
+    <div>
+      <ul>
+        <li><a href="">item 1</a></li>
+        <li><a href="">item 2</a></li>
+      </ul>
+    </div>
+  </div> -->
+
+  <div class="accordion" id="accordionExample">
+    <div *ngFor="let category of categories; let i=index" class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+i" aria-expanded="true" aria-controls="collapseOne">
+          {{category.category}}
+        </button>
+      </h2>
+      <div [id]="'collapse'+i" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <ul>
+            <li *ngFor="let item of categoryService.getSubCategory(category.id)">
+              {{item.category}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
