@@ -4,7 +4,9 @@ import dotenv from 'dotenv';
 import { connectToDatabase , client } from './db/db.js';
 import productsRouter from './routers/products.router.js';
 import categoriesRouter from './routers/categories.router.js';
-import { authMiddleWare } from './middlewares/auth.middleware.js'; 
+import usersRouter from './routers/users.router.js';
+import { userMiddleWare ,adminMiddleWare ,superMiddleWare } from './middlewares/auth.middleware.js'; 
+
 
 const app = express();
 
@@ -15,8 +17,9 @@ dotenv.config()
 
 connectToDatabase();
 
-app.use('/api/v1',authMiddleWare,productsRouter);
-app.use('/api/v1',authMiddleWare,categoriesRouter);
+app.use('/api/v1',usersRouter);
+app.use('/api/v1',userMiddleWare,productsRouter);
+app.use('/api/v1',userMiddleWare,categoriesRouter);
 
 
 app.listen(3001, () => {
